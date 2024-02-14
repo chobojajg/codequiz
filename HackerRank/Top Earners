@@ -1,0 +1,11 @@
+select concat(max(earnings), ' ', count(earnings))
+from 
+(
+    select months, salary, months * salary as 'earnings'
+    from Employee
+) a
+where earnings = (
+    select max(months * salary) as 'earnings'
+    from Employee
+)
+group by earnings
