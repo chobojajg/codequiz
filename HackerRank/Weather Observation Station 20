@@ -1,0 +1,6 @@
+select round(lat_n, 4)
+from (
+    select lat_n, percent_rank() over (order by lat_n) as 'percent'
+    from STATION 
+) a
+where percent = 0.5
