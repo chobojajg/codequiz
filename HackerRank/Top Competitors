@@ -1,0 +1,19 @@
+select hacker_id, name
+from (
+    select
+        s.submission_id as 'submission_id',
+        s.hacker_id as 'hacker_id',
+        h.name 'name',
+        s.challenge_id as 'challenge_id',
+        s.score as 'r_score',
+        d.difficulty_level as 'difficulty_level',
+        d.score as 'max_score'
+    from Submissions s
+        left join Challenges c on s.challenge_id = c.challenge_id
+        left join Difficulty d on c.difficulty_level = d.difficulty_level
+        left join Hackers h on s.hacker_id = h.hacker_id
+) a
+where r_score = max_score
+group by hacker_id, name
+having count(hacker_id) >= 2
+order by count(hacker_id) desc, hacker_id
