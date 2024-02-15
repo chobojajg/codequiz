@@ -1,0 +1,21 @@
+select h.hacker_id, name, count(challenge_id)
+from Challenges c left join Hackers h on c.hacker_id = h.hacker_id
+group by h.hacker_id, name
+having count(challenge_id) = (
+    select count(challenge_id)
+    from Challenges c left join Hackers h on c.hacker_id = h.hacker_id
+    group by h.hacker_id, name
+    order by count(challenge_id) desc, h.hacker_id
+    limit 1
+) or count(challenge_id) not in (
+    select cnt_cid
+    from(
+        select count(challenge_id) as 'cnt_cid'
+        from Challenges c left join Hackers h on c.hacker_id = h.hacker_id
+        group by h.hacker_id, name
+        order by count(challenge_id) desc, h.hacker_id
+    ) a
+    group by cnt_cid
+    having count(cnt_cid) > 1
+)
+order by count(challenge_id) desc, h.hacker_id
