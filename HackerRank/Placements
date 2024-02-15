@@ -1,0 +1,15 @@
+select name
+from(
+    select 
+        s.name as 'name',
+        s.id as 'id',
+        po.salary as 'salary',
+        f.friend_id as 'friend_id',
+        pt.salary as 'f_salary'
+    from students s 
+        left join packages po on s.id = po.id
+        left join friends f on s.id = f.id
+        left join packages pt on f.friend_id = pt.id
+) a
+where salary < f_salary
+order by f_salary
