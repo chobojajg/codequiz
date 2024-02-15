@@ -1,0 +1,3 @@
+select a.name
+from city a left join country b on a.CountryCode = b.code
+where b.CONTINENT = 'Africa'
