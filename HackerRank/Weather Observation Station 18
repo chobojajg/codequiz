@@ -1,0 +1,2 @@
+select round((max(lat_n)-min(lat_n)) + (max(LONG_W)-min(LONG_W)), 4)
+from station
