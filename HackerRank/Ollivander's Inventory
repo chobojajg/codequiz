@@ -1,0 +1,8 @@
+select id, age, coins_needed, power
+from Wands w left join Wands_Property p on w.code = p.code
+where is_evil = 0 and (age, coins_needed, power) in (
+    select age, min(coins_needed), power
+    from Wands w left join Wands_Property p on w.code = p.code
+    group by age, power
+)
+order by power desc, age desc
