@@ -1,0 +1,37 @@
+select ss.Contest_id, ss.hacker_id, ss.name, ss.total_submissions, ss.total_accepted_submissions, vs.total_views, vs.total_unique_views
+from
+    (select Contest_id,
+        hacker_id,
+        name,
+        sum(total_submissions) as 'total_submissions',
+        sum(total_accepted_submissions) as 'total_accepted_submissions'
+    from 
+        (select Sub_S.challenge_id as 'challenge_id',
+            Con.Contest_id as 'Contest_id',
+            Con.hacker_id as 'hacker_id',
+            Con.name as 'name',
+            Sub_S.total_submissions as 'total_submissions',
+            Sub_S.total_accepted_submissions as 'total_accepted_submissions'
+        from Submission_Stats Sub_S left join 
+            Challenges Chall on Sub_S.challenge_id = Chall.challenge_id left join
+            Colleges Coll on Chall.college_id = Coll.college_id left join
+            Contests Con on Coll.contest_id = Con.contest_id) a
+    group by Contest_id, hacker_id, name) ss left join
+    (select Contest_id,
+        hacker_id,
+        name,
+        sum(total_views) as 'total_views',
+        sum(total_unique_views) as 'total_unique_views'
+    from 
+        (select V_S.challenge_id as 'challenge_id',
+            Con.Contest_id as 'Contest_id',
+            Con.hacker_id as 'hacker_id',
+            Con.name as 'name',
+            V_S.total_views as 'total_views',
+            V_S.total_unique_views as 'total_unique_views'
+        from View_Stats V_S left join 
+            Challenges Chall on V_S.challenge_id = Chall.challenge_id left join
+            Colleges Coll on Chall.college_id = Coll.college_id left join
+            Contests Con on Coll.contest_id = Con.contest_id) a
+    group by Contest_id, hacker_id, name) vs on ss.Contest_id = vs.Contest_id and ss.hacker_id = vs.hacker_id and ss.name = vs.name
+where (ss.total_submissions + ss.total_accepted_submissions + vs.total_views + vs.total_unique_views) > 0
