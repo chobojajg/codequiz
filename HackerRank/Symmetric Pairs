@@ -1,0 +1,6 @@
+select x, y
+from (select if(x <= y, x , y) as x, if(x <= y, y , x) as y
+      from Functions) a
+group by x, y
+having count(*) >= 2
+order by x
