@@ -3,5 +3,4 @@ def solution(number, n, m):
         if number%m == 0:
             return 1
         return 0
-    answer = 0
-    return answer
+    return 0
