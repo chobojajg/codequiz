@@ -8,6 +8,7 @@ for _ in range(n):
                 check.remove('(')
             else:
                 check.append(i)
+                break
         else:
             check.append(i)
     if len(check) == 0:
