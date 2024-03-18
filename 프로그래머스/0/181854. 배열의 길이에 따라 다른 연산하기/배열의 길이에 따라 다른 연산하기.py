@@ -1,10 +1,11 @@
 def solution(arr, n):
-    if len(arr) % 2 == 0:
-        for i in range(len(arr)):
+    la = len(arr)
+    if la % 2 == 0:
+        for i in range(la):
             if i % 2 == 1:
                 arr[i] += n
     else:
-        for i in range(len(arr)):
+        for i in range(la):
             if i % 2 == 0:
                 arr[i] += n
                 
