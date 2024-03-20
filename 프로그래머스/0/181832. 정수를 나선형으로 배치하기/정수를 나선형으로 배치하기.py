@@ -2,8 +2,8 @@ def solution(n):
     answer = []
     rv = 1
     cv = 1
-    rcnt = 0
-    ccnt = 0
+    # rcnt = 0
+    # ccnt = 0
     r = -1
     c = 0
     num = 0
