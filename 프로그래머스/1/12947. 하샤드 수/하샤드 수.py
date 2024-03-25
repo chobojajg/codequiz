@@ -1,12 +1,19 @@
 def solution(x):
-    xstrarr = list(str(x))
-    xintarr = []
-    for i in range(len(xstrarr)):
-        xintarr.append(int(xstrarr[i]))
-    
-    if x % sum(xintarr) == 0:
-        answer = True
+    xarr = list(map(int, str(x)))
+    if x % sum(xarr) == 0:
+        return True
     else:
-        answer = False
+        return False
+
+# def solution(x):
+#     xstrarr = list(str(x))
+#     xintarr = []
+#     for i in range(len(xstrarr)):
+#         xintarr.append(int(xstrarr[i]))
     
-    return answer
+#     if x % sum(xintarr) == 0:
+#         answer = True
+#     else:
+#         answer = False
+    
+#     return answer
