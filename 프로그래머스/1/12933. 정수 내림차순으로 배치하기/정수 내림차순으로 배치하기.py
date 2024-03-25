@@ -1,18 +1,23 @@
 def solution(n):
-    answer = 0
+    arr = list(str(n))
+    arr.sort(reverse = True)
+    return int(''.join(arr))
     
-    listn = list(str(n))
-    listnumn = []
-    listn2 = []
+# def solution(n):
+#     answer = 0
     
-    for i in range(len(listn)):
-        listnumn.append(int(listn[i]))
+#     listn = list(str(n))
+#     listnumn = []
+#     listn2 = []
     
-    listnumn.sort(reverse = True)
+#     for i in range(len(listn)):
+#         listnumn.append(int(listn[i]))
     
-    for i in range(len(listnumn)):
-        listn2.append(str(listnumn[i]))
+#     listnumn.sort(reverse = True)
+    
+#     for i in range(len(listnumn)):
+#         listn2.append(str(listnumn[i]))
         
-    answer = int("".join(listn2))
+#     answer = int("".join(listn2))
     
-    return answer
+#     return answer
