@@ -2,10 +2,6 @@ def solution(numbers):
     answer = []
     stack = []
     for i in reversed(numbers):
-        if len(stack) == 0:
-            stack.append(i)
-            answer.append(-1)
-            continue
         while len(stack) > 0:
             if stack[-1] <= i:
                 stack.pop()
@@ -17,6 +13,26 @@ def solution(numbers):
         else:
             answer.append(stack[-2])
     return answer[::-1]
+
+# def solution(numbers):
+#     answer = []
+#     stack = []
+#     for i in reversed(numbers):
+#         if len(stack) == 0:
+#             stack.append(i)
+#             answer.append(-1)
+#             continue
+#         while len(stack) > 0:
+#             if stack[-1] <= i:
+#                 stack.pop()
+#             else:
+#                 break
+#         stack.append(i)
+#         if len(stack) == 1:
+#             answer.append(-1)
+#         else:
+#             answer.append(stack[-2])
+#     return answer[::-1]
 
 # 4 - 1번보다 빠르지만 시간초과
 # def solution(numbers):
